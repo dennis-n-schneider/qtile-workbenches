@@ -1,16 +1,28 @@
 # Workbenches
+Adds an organizational layer to qtile, which is one step over groups.
+With this layer, different work environments can be split.
 
-## Setup
-
-```python
-pip install qt-workbench
-```
+## Minimal setup
 
 Assuming usage of default parameters, embed the functionality into your config:
 ```python
+groups = workbenches.init()
+keys.extend(workbenches.setup_keys())
+```
+
+## Show groups according to workbench
+```python
+workbenches.groupbox = widget.GroupBox(
+    visible_groups=workbenches.workbenches.active.groups,
+    ...
+)
+```
+
+## Advanced configurations
+```python
 groups = workbenches.init(
     group_names=list("123456789"),
-    workbenches=[
+    configs=[
         {
             "name": "",
             "icon": ""
@@ -22,21 +34,17 @@ groups = workbenches.init(
     ],
 )
 keys.extend(workbenches.setup_keys(
-    modifier="mod4",
+    modifier=["mod4"],
     workbench_cycle_key="tab"
 ))
 ```
 
-Show groups local to workbench:
-```python
-workbenches.gb
-```
-Customize by using a `widget.GroupBox` and accessing `workbenches.active.groups` in `visible_groups=`.
-
-## Visualization of currently active workbench in statusbar
+## Visualization of currently active workbench in status bar
 
 ```python
-workbenches.widget # Shows the respective icon.
+workbenches.width = widget.TextBox(
+    workbenches.workbenches.active.icon,
+    ...
+)
 ```
-Customize by using any `widget.TextBox` and `workbenches.active.icon`.
 
