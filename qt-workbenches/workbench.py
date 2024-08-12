@@ -22,7 +22,6 @@ def init(
     groups = [Group(g, label="󰝥")
         for wb in workbenches
         for g in wb.groups]
-    logger.warning(groups)
     return groups
 
 @lazy.screen.function
