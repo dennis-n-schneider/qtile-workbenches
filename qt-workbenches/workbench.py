@@ -7,7 +7,7 @@ from core import WorkbenchManager, Workbench
 
 workbenches: WorkbenchManager
 groupbox: widget.GroupBox
-widget: widget.TextBox
+icon_widget: widget.TextBox
 
 
 def init(
@@ -16,12 +16,13 @@ def init(
 ):
     global workbenches
     workbenches = WorkbenchManager([
-        Workbench(wb.get("name", ""), wb.get("icon", ""), group_names)
-        for wb in configs
+        Workbench(str(i), wb.get("icon", ""), group_names)
+        for i, wb in enumerate(configs)
     ])
     groups = [Group(g, label="󰝥")
         for wb in workbenches
         for g in wb.groups]
+    logger.warning(groups)
     return groups
 
 @lazy.screen.function
@@ -29,7 +30,7 @@ def cycle_workbenches(s):
     workbenches.cycle()
     s.toggle_group(workbenches.active.active_group)
     groupbox.visible_groups=workbenches.active.groups
-    widget.update(workbenches.active.icon)
+    icon_widget.update(workbenches.active.icon)
 
 @lazy.screen.function
 def go_to_screen(s, i):
@@ -67,14 +68,14 @@ def setup_keys(modifiers=None, workbench_cycle_key="tab"):
                 # mod1 + letter of group = switch to group
                 Key(
                     modifiers,
-                    group_name,
+                    str(i+1),
                     go_to_screen(i),
                     desc="Switch to group {}".format(group_name),
                 ),
                 # mod1 + shift + letter of group = switch to & move focused window to group
                 Key(
                     modifiers + ["shift"],
-                    group_name,
+                    str(i+1),
                     move_to_screen(i),
                     desc="Move focused window to group {}".format(group_name),
                 ),

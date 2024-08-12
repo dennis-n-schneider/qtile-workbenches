@@ -1,15 +1,14 @@
 class Workbench:
 
-    def __init__(self, name, icon, groups: list):
-        self.name = name
+    def __init__(self, ident, icon, groups: list):
+        self._ident = ident
         self.icon = icon
         self._groups = groups
         self._active_group = self.groups[0]
 
     @property
     def groups(self) -> list:
-        return [self.name + "_" + g if self.name else g
-            for g in self._groups]
+        return [self._ident + "_" + g for g in self._groups]
 
     @property
     def active_group(self):
@@ -42,6 +41,4 @@ class WorkbenchManager:
 
     def cycle(self, amount=1):
         self._active = (self._active+amount)%len(self._workbenches)
-
-    # TODO Register any GroupBox and TextBox!
 
