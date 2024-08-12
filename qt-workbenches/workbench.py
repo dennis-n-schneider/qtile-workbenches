@@ -11,13 +11,13 @@ icon_widget: widget.TextBox
 
 
 def init(
-    configs: list[dict[str, str]],
+    workbench_icons: list[str],
     group_names: list = list("123456789"),
 ):
     global workbenches
     workbenches = WorkbenchManager([
-        Workbench(str(i), wb.get("icon", ""), group_names)
-        for i, wb in enumerate(configs)
+        Workbench(str(i), icon, group_names)
+        for i, icon in enumerate(workbench_icons)
     ])
     groups = [Group(g, label="󰝥")
         for wb in workbenches

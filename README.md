@@ -22,16 +22,7 @@ workbenches.groupbox = widget.GroupBox(
 ```python
 groups = workbenches.init(
     group_names=list("123456789"),
-    configs=[
-        {
-            "name": "",
-            "icon": ""
-        },
-        {
-            "name": "work",
-            "icon": "🛠"
-        },
-    ],
+    workbench_icons=[ "", "🛠" ],
 )
 keys.extend(workbenches.setup_keys(
     modifier=["mod4"],
