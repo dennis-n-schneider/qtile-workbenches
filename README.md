@@ -14,7 +14,7 @@ keys.extend(wb.setup_keys())
 
 ## Show groups according to workbench
 ```python
-widget.groupbox = widget.GroupBox(
+wb.groupbox = widget.GroupBox(
     visible_groups=wb.workbenches.active.groups,
     ...
 )
