@@ -6,32 +6,36 @@ With this layer, different work environments can be split.
 
 Assuming usage of default parameters, embed the functionality into your config:
 ```python
-groups = workbenches.init()
-keys.extend(workbenches.setup_keys())
+import workbenches as wb
+
+groups = wb.init()
+keys.extend(wb.setup_keys())
 ```
 
 ## Show groups according to workbench
 ```python
-workbenches.groupbox = widget.GroupBox(
-    visible_groups=workbenches.workbenches.active.groups,
+widget.groupbox = widget.GroupBox(
+    visible_groups=wb.workbenches.active.groups,
     ...
 )
 
 ...
 bar.Bar([
     ...
-    workbenches.groupbox,
+    wb.groupbox,
     ...
 ])
 ```
 
 ## Advanced configurations
 ```python
-groups = workbenches.init(
+groups = wb.init(
+    # Determines the number of usable workbenches and their respective icons to be displayed using `wb.widget`.
+    icons=["", "🛠"],
+    # Determines the number of groups per workbench.
     group_names=list("123456789"),
-    workbench_icons=[ "", "🛠" ],
 )
-keys.extend(workbenches.setup_keys(
+keys.extend(wb.setup_keys(
     modifier=["mod4"],
     workbench_cycle_key="tab"
 ))
@@ -40,15 +44,15 @@ keys.extend(workbenches.setup_keys(
 ## Visualization of currently active workbench in status bar
 
 ```python
-workbenches.width = widget.TextBox(
-    workbenches.workbenches.active.icon,
+wb.widget = widget.TextBox(
+    wb.workbenches.active.icon,
     ...
 )
 
 ...
 bar.Bar([
     ...
-    workbenches.width,
+    wb.widget,
     ...
 ])
 ```
