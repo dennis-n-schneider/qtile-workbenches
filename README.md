@@ -1,5 +1,5 @@
 # Workbenches
-Adds an organizational layer to qtile, which is one step over groups.
+Adds an organizational layer to qtile, which is one step above groups.
 With this layer, different work environments can be split.
 
 ## Minimal setup
@@ -16,6 +16,13 @@ workbenches.groupbox = widget.GroupBox(
     visible_groups=workbenches.workbenches.active.groups,
     ...
 )
+
+...
+bar.Bar([
+    ...
+    workbenches.groupbox,
+    ...
+])
 ```
 
 ## Advanced configurations
@@ -37,5 +44,12 @@ workbenches.width = widget.TextBox(
     workbenches.workbenches.active.icon,
     ...
 )
+
+...
+bar.Bar([
+    ...
+    workbenches.width,
+    ...
+])
 ```
 
